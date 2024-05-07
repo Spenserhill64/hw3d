@@ -1,5 +1,16 @@
 #include <Windows.h>
 
+LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+	case WM_CLOSE:
+		PostQuitMessage(69);
+		break;
+	}
+	return DefWindowProc(hWnd, msg, wParam, lParam);
+}
+
 int CALLBACK WinMain(
 	HINSTANCE hInstance,
 	HINSTANCE hPrevInstance,
@@ -32,6 +43,23 @@ int CALLBACK WinMain(
 	);
 	// show the damn window
 	ShowWindow(hWnd, SW_SHOW);
-	while (true);
-	return 0;
+	
+	// message pump
+	MSG msg;
+	BOOL gResult;
+	while( (gResult = GetMessage( &msg, nullptr, 0, 0)) > 0)
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	if (gResult == -1)
+	{
+		return -1;
+	}
+	else
+	{
+		return msg.wParam;
+	}
+	
 }
