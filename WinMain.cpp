@@ -12,7 +12,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYDOWN:
 		if (wParam == 'F')
 		{
-			SetWindowText(hWnd,"Respects");
+			SetWindowText(hWnd,"Banana");
+		}
+		break;
+	case WM_KEYUP:
+		if (wParam == 'F')
+		{
+			SetWindowText(hWnd, "Sandwich");
 		}
 		break;
 	}
